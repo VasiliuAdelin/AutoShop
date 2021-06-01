@@ -1,0 +1,417 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>ICAPITSTOP</title>
+	<link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'style/font-awesome.min.css' %}" rel="stylesheet">
+	<link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet">
+	<link href="{% static 'style/price-range.css' %}" rel="stylesheet">
+	<link href="{% static 'style/animate.css' %}" rel="stylesheet">
+	<link href="{% static 'style/main.css' %}" rel="stylesheet">
+	<link href="{% static 'style/responsive.css' %}" rel="stylesheet">
+	<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+	<link rel="shortcut icon" href="images/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+		href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+</head>
+<!--/head-->
+
+<body>
+	<header id="header">
+		<!--header-->
+		<div class="header_top">
+			<!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i> +04 755 836 669</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> ICAPitstopAutoshop@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="https://twitter.com/?lang=ro"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header_top-->
+
+		<div class="header-middle">
+			<!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="{% static 'images1/home/logo.png' %}" alt="" /></a>
+						</div>
+
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								{% if request.session.user_id %}
+								<li><a>Hello, {{request.session.username}} !</a></li>
+								<li><a href="shop.html"><i class="fa fa-barcode"></i> Shop</a></li>
+								<li><a href="#contact-us"><i class="fa fa-phone"></i> Contact</a></li>
+								<li><a href="account.html"><i class="fa fa-user"></i> Account</a></li>
+								<!-- <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li> -->
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="logout.html"><i class="fa fa-lock"></i> Logout</a></li>
+								{% else %}
+								<li><a href="shop.html"><i class="fa fa-barcode"></i> Shop</a></li>
+								<li><a href="#contact-us"><i class="fa fa-phone"></i> Contact</a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header-middle-->
+
+
+
+		<section id="slider">
+			<!--slider-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+								<li data-target="#slider-carousel" data-slide-to="1"></li>
+								<li data-target="#slider-carousel" data-slide-to="2"></li>
+								<li data-target="#slider-carousel" data-slide-to="3"></li>
+								<li data-target="#slider-carousel" data-slide-to="4"></li>
+							</ol>
+
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="col-sm-6">
+										<h1><span>ICA-</span>PitStop AutoShop</h1>
+										<h2>Best tires, best shop!</h2>
+										<p>If you find better tires, at more resonable prices, we pay 10 times the
+											difference! </p>
+										<button type="button" class="btn btn-default get">Get it now</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="{% static 'images1/home/girl1.jpg' %}" class="girl img-responsive"
+											alt="" />
+										<!-- <img src="images1/home/pricing.png"  class="pricing" alt="" /> -->
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-6">
+										<h1><span>ICA-</span>PitStop AutoShop</h1>
+										<h2>Longlasting batteries from ICA!</h2>
+										<p>Nowhere better! Always quality batteries, now at a lover price than anything
+											on the market! </p>
+										<button type="button" class="btn btn-default get">Get it now</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="{% static 'images1/home/girl2.jpg' %}" class="girl img-responsive"
+											alt="" />
+										<img src="{% static 'images1/home/pricing.png' %}" class="pricing" alt="" />
+									</div>
+								</div>
+
+								<div class="item">
+									<div class="col-sm-6">
+										<h1><span>ICA-</span>PitStop AutoShop</h1>
+										<h2>Most of it shall be oil!</h2>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+											tempor incididunt ut labore et dolore magna aliqua. </p>
+										<button type="button" class="btn btn-default get">Get it now</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="{% static 'images1/home/girl3.jpg' %}" class="girl img-responsive"
+											alt="" />
+										<!-- <img src="images1/home/pricing.png" class="pricing" alt="" /> -->
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-6">
+										<h1><span>ICA-</span>PitStop AutoShop</h1>
+										<h2>Wipes even the unpleaseant memories from your EX!</h2>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+											tempor incididunt ut labore et dolore magna aliqua. </p>
+										<button type="button" class="btn btn-default get">Get it now</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="{% static 'images1/home/girl4.jpg' %}" class="girl img-responsive"
+											alt="" />
+										<!-- <img src="images1/home/pricing.png" class="pricing" alt="" /> -->
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-6">
+										<h1><span>ICA-</span>PitStop AutoShop</h1>
+										<h2>Buy them for your wife!</h2>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+											tempor incididunt ut labore et dolore magna aliqua. </p>
+										<button type="button" class="btn btn-default get">Get it now</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="{% static 'images1/home/girl5.jpg' %}" class="girl img-responsive"
+											alt="" />
+										<!-- <img src="images1/home/pricing.png" class="pricing" alt="" /> -->
+									</div>
+								</div>
+
+							</div>
+
+							<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/slider-->
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="left-sidebar">
+							<h2>Category</h2>
+							{% for c in categories.categories %}
+							<div class="panel-group category-products" id="accordian">
+								<!--category-productsr-->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<form action="shopShowAllProducts" method="POST">
+											<input type="text" name="cat" id="{{ c }}" value="{{ c }}" class="hidden"/>
+											{% csrf_token %}
+											<input class="buttonCategories" type="submit" class="panel-title" value="{{ c }}"/>
+											{% csrf_token %}
+									</form>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+							<!--/category-products-->
+
+							<h2>Brands</h2>
+							<div class="panel-group category-products" id="accordian">
+								<!--category-productsr-->
+								
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<input type="text" class="hidden" name="">
+										<h4 class="panel-title">>Kids</h4>
+									</div>
+								</div>
+
+							</div>
+							<!--/category-products-->
+
+
+						</div>
+					</div>
+
+					<div class="col-sm-9 padding-right">
+						<div class="features_items">
+							<!--features_items-->
+							<h2 class="title text-center">Best discounts you can find are here!</h2>
+							{% block content %}
+							{% for elem in temp.produse %}
+							<div class="col-sm-4">
+								<div class="product-image-wrapper">
+									<div class="single-products">
+										<div class="productinfo text-center">
+											<img src="{{elem.10}}" alt="" />
+											<h3></h3>
+											<p style="text-decoration: line-through;">{{elem.7}}</p>
+											<p>{{elem.11}}</p>
+											<form action="addProductToCart" method="POST">
+												<input type="text" name="id_product" value={{elem.0}} class="hidden">
+												{% csrf_token %}
+												<button class="btn btn-default add-to-cart" type="submit"><i
+														class="fa fa-times">Add to cart!</i></button>
+											</form>
+										</div>
+										<div class="product-overlay">
+											<div class="overlay-content">
+												<h2>{{elem.7}}</h2>
+												<p>{{elem.2}}</p>
+												<form action="addProductToCart" method="POST">
+													<input type="text" name="id_product" value={{elem.0}}
+														class="hidden">
+													{% csrf_token %}
+													<button class="btn btn-default add-to-cart" type="submit"><i
+															class="fa fa-times">Add to cart!</i></button>
+												</form>
+											</div>
+										</div>
+										<img src="{% static 'images/home/sale.png' %}" class="new" alt="" />
+									</div>
+								</div>
+
+							</div>
+							{% endfor %}
+							
+							{% endblock %}
+
+						</div>
+						<!--features_items-->
+
+
+
+						<div class="recommended_items">
+							<!--recommended_items-->
+							<h2 class="title text-center">We sure know you want theese!</h2>
+
+							<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+
+									<div class="item active">
+										{% for elem in temp.produse %}
+										<div class="col-sm-4">
+
+											<div class="product-image-wrapper">
+												<form action="interested" class="single-products">
+													<div class="productinfo text-center">
+														<img src="{{elem.10}}" alt="" />
+														<h2>{{elem.7}}</h2>
+														<p>{{elem.2}}</p>
+														<a href="#" class="btn btn-default add-to-cart"><i
+																class="fa fa-shopping-cart"></i>Add to cart</a>
+													</div>
+
+												</form>
+											</div>
+
+										</div>
+										{% endfor %}
+									</div> <!-- first line of the carousel-->
+
+								</div>
+							</div>
+						</div>
+						<!--/recommended_items-->
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer id="footer">
+			<!--Footer-->
+			<div class="footer-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8">
+							<div class="contact-form" id="contact-us">
+								<br><br><br>
+								<h2 class="title text-center">Get In Touch With Us!</h2>
+								<div class="status alert alert-success" style="display: none"></div>
+								<form id="main-contact-form" class="contact-form row" name="contact-form" method="post"
+									action="contact_us">
+									<div class="form-group col-md-6">
+										<input type="text" name="name" class="form-control" required="required"
+											placeholder="Name">
+										{% csrf_token %}
+									</div>
+									<div class="form-group col-md-6">
+										<input type="email" name="email" class="form-control" required="required"
+											placeholder="Email">
+										{% csrf_token %}
+									</div>
+									<div class="form-group col-md-12">
+										<input type="text" name="subject" class="form-control" required="required"
+											placeholder="Subject">
+										{% csrf_token %}
+									</div>
+									<div class="form-group col-md-12">
+										<textarea name="message" id="message" required="required" class="form-control"
+											rows="8" placeholder="Your Message Here"></textarea>
+										{% csrf_token %}
+									</div>
+									<div class="form-group col-md-12">
+										<input type="submit" name="submit" class="btn btn-primary pull-right"
+											value="Submit">
+										{% csrf_token %}
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="contact-info">
+								<br><br><br>
+								<h2 class="title text-center">Contact Info</h2>
+								<address>
+									<p>ICA Pitstop Autoshop SRL</p>
+									<p>Tudor Vladimirescu, Iasi</p>
+									<p>Romania</p>
+									<p>Mobile: +04 755 836 669</p>
+									<p>Fax: 1-714-252-0026</p>
+									<p>Email: ICAPitstopAutoshop@domain.com</p>
+								</address>
+								<div class="social-networks">
+									<h2 class="title text-center">Social Networking</h2>
+									<ul>
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-google-plus"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-youtube"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</footer>
+		<!--/Footer-->
+
+
+		<script src="{% static 'js/price-range.js' %}'"></script>
+		<script src="{% static 'js/jquery.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+		<script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+		<script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

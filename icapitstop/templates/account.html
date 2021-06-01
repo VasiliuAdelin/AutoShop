@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICAPITSTOP</title>
+
+    <link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'style/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'style/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'style/main.css' %}" rel="stylesheet">
+    <link href="{% static 'style/responsive.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<!--/head-->
+
+<body>
+
+    <header id="header">
+        <!--header-->
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <img src="{% static 'images1/home/logo.png'%}" alt="" />
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                {% if request.session.user_id %}
+								<li><a>Hello, {{request.session.username}} !</a></li>
+								<li><a href="shop.html" ><i class="fa fa-barcode"></i> Shop</a></li>
+								<li><a href="#contact-us"><i class="fa fa-phone"></i> Contact</a></li>
+								<li><a href="account.html" class = "active"><i class="fa fa-user"></i> Account</a></li>
+								<!-- <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li> -->
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="logout.html"><i class="fa fa-lock"></i> Logout</a></li>
+								{% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <!--/header-middle-->
+
+        <section id="cart_items">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">Client -> Account</li>
+                    </ol>
+                </div>
+
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h3 style="padding-left:45%">Your infos!</h3>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="price">
+                                    <h4>Username</h4>
+                                </td>
+                                <td class="price">
+                                    <h4 style="padding-right: 30%;">First Name</h4>
+                                </td>
+                                <td class="price">
+                                    <h4 style="padding-left: 25%;">Last Name</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Email</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Address</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Telephone</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Edit infos</h4>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td class="">
+                                <p>
+                                    <h4 >{{infos.username}}</h4>
+                                </p>
+                            </td>
+                            <td class="">
+                                <p>
+                                    <h4 >{{infos.first_name}}</h4>
+                                </p>
+                            </td>
+                            <td class="">
+                                <p>
+                                    <h4>{{infos.last_name}}</h4>
+                                </p>
+                            </td>
+                            <td class="">
+                                <p>
+                                    <h4>{{infos.email}}</h4>
+                                </p>
+                            </td>
+                            <td class="">
+                                <p>
+                                    <h4>{{infos.address}}</h4>
+                                </p>
+                            </td>
+                            <td class="">
+                                <p>
+                                    <h4>{{infos.telephone}}</h4>
+                                </p>
+                            </td>
+                            <td class="">
+                                <button id="newSupplierBtn" class="modalButton edit" style="background-color:#FE980F;">Edit your infos!</button>
+                                <div id="myModal" class="modal newSupplier">
+                                    <br><Br>
+                                    <div class="modal-content">
+                                        <span class="close newSupplier">&times;</span>
+                                        <br><br>
+                                        <h2 class="title text-center admin" style="color:#FE980F;">Edit your infos!</h2>
+                                        <div class="status alert alert-success" style="display: none"></div>
+                                        <form id="main-contact-form" class="contact-form row" name="infos-form" method="post" action="update_infos">
+                                            <div class="form-group col-md-6">
+                                                <label>Username: </label><input type="text" name="username" class="form-control" required="required" placeholder="Username" value = "{{infos.username}}" disabled>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>First name: </label><input type="text" name="fname" class="form-control" required="required" placeholder="First name" value="{{infos.first_name}}">{% csrf_token %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Last name: </label><input type="text" name="lname" class="form-control" required="required" placeholder="Last Name"value="{{infos.last_name}}"> {% csrf_token %}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Email: </label><input type="email" name="email" class="form-control" required="required" placeholder="Email" value="{{infos.email}}"> {% csrf_token %}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Address: </label><input type="text" name="address" class="form-control" required="required" placeholder="Address" value="{{infos.address}}"> {% csrf_token %}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Telephone: </label><input type="tel" name="telephone" class="form-control" required="required" pattern="07[0-9]{8}" value="{{infos.telephone}}" placeholder="Telephone"> {% csrf_token %}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <input type="submit" name="change" class="form-control change_pass" value="Update Infos"> {% csrf_token %}
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="modal-content change_password">
+            {% if success == "1" %}
+                <center>
+                    <div style="border: 1px solid black;background-color:#fab35670;">
+                        <h2 style="color:green;">Password changed successfully</h2>
+                    </div>
+                </center>
+            {% else %}
+            {% if success == "0" %}
+            <center>
+                <div style="border: 1px solid black;background-color:#fab35670;">
+                    <h2 style="color:red;">Password change failed</h2>
+                </div>
+            </center>
+            {% endif %}
+            {% endif %}
+            <br>
+            <h2 class="title text-center admin" style="color:#FE980F;">Change password!</h2>
+            <div class="status alert alert-success" style="display: none"></div>
+            <form id="main-contact-form" class="contact-form row" name="password-change" method="post" action="change_password">
+                <div class="form-group col-md-6">
+                    <label>Old password: </label><input type="password" name="oldpass" class="form-control" required="required" placeholder="Old password...">{% csrf_token %}
+                </div>
+                <div class="form-group col-md-6">
+                    <label>New password: </label><input type="password" name="newpass" class="form-control" required="required" placeholder="Old password...">{% csrf_token %}
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Confirm new password: </label><input type="password" name="cnewpass" class="form-control" required="required" placeholder="Old password..."> {% csrf_token %}
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="submit" name="change_pass" id="change_pass" class="form-control change_pass" value="Change password"> {% csrf_token %}
+                </div>
+            </form>
+        </div>
+
+
+
+        <!--/#cart_items-->
+
+        <footer id="footer">
+            <!--Footer-->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="contact-form" id="contact-us">
+                                <br><br><br>
+                                <h2 class="title text-center">Get In Touch With Us!</h2>
+                                <div class="status alert alert-success" style="display: none"></div>
+                                <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="contact_us">
+                                    <div class="form-group col-md-6">
+                                        <input type="text" name="name" class="form-control" required="required" placeholder="Name"> {% csrf_token %}
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="email" name="email" class="form-control" required="required" placeholder="Email"> {% csrf_token %}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="text" name="subject" class="form-control" required="required" placeholder="Subject"> {% csrf_token %}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your Message Here"></textarea> {% csrf_token %}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit"> {% csrf_token %}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="contact-info">
+                                <br><br><br>
+                                <h2 class="title text-center">Contact Info</h2>
+                                <address>
+                                    <p>ICA Pitstop Autoshop SRL</p>
+                                    <p>Tudor Vladimirescu, Iasi</p>
+                                    <p>Romania</p>
+                                    <p>Mobile: +04 755 836 669</p>
+                                    <p>Fax: 1-714-252-0026</p>
+                                    <p>Email: ICAPitstopAutoshop@domain.com</p>
+                                </address>
+                                <div class="social-networks">
+                                    <h2 class="title text-center">Social Networking</h2>
+                                    <ul>
+                                        <li>
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-youtube"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+    
+    
+    
+        </footer>
+
+
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/modal.js' %}"></script>
+
+</body>
+
+</html>

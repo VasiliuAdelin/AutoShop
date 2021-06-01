@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICAPITSTOP</title>
+
+    <link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'style/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'style/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'style/main.css' %}" rel="stylesheet">
+    <link href="{% static 'style/responsive.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<!--/head-->
+
+<body>
+
+    <header id="header">
+        <!--header-->
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <img src="{% static 'images1/home/logo.png'%}" alt="" />
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="logout.html"><i class="fa fa-lock"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/header-middle-->
+
+
+        <section id="cart_items">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">Admin</li>
+                    </ol>
+                </div>
+                <form class="example" action="action_page.php">
+                    <input type="text" placeholder="Search for a supplier..." name="search"> {% csrf_token %}
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <br>
+
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h3 style="padding-right: 30%;"> The list of shop's suppliers!</h3>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+
+                        <thead>
+                            <tr class="cart_menu">
+                                <td></td>
+                                <td class="price">
+                                    <h4>Supplier's ID</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Supplier's NAME</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Supplier's EMAIL</h4>
+                                </td>
+                                <td class="price"></td>
+                                <td class="price">
+                                    <h4>Delete Supplier</h4>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for elem in suppliers.suppliers %}
+                            <form action="delete_supp" method="post">
+                                <tr>
+                                    <td class="cart_product">
+                                    </td>
+                                    <td class="cart_description">
+                                        <p>
+                                            <h4>{{elem.0}}</h4>
+                                        </p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p>{{elem.1}}</p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p>{{elem.2}}</p>
+                                    </td>
+                                    <td class="cart_price">
+                                    </td>
+                                    <td style="padding-left: 30%;" class="cart_delete">
+                                        <input type="hidden" value={ {elem.1}} name="username_delete" /> {% csrf_token %}
+                                        <button type="submit" name="delete" class="delete_button"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                            </form>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!--/#cart_items-->
+        <button class="modalButton" id="newSupplierBtn">Add a new supplier account!</button>
+        <div id="myModal" class="modal newSupplier">
+
+            <div class="modal-content">
+                <span class="close newSupplier">&times;</span>
+                <br><br><br>
+                <h2 class="title text-center admin">Add a new supplier account!</h2>
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="create_supplier">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="name" class="form-control" required="required" placeholder="Name"> {% csrf_token %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="email" name="email" class="form-control" required="required" placeholder="Email"> {% csrf_token %}
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" name="username" class="form-control" required="required" placeholder="Account username..."> {% csrf_token %}
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="password" name="accPassword" class="form-control" required="required" placeholder="Account password..."> {% csrf_token %}
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="password" name="confPassword" class="form-control" required="required" placeholder="Account password confirmation..."> {% csrf_token %}
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="submit" name="create" class="form-control adminPage" value="Submit"> {% csrf_token %}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <br><br>
+
+        <section id="cart_items">
+            <div class="container">
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h3 style="padding-left: 65%;"> Messages!</h3>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="price">
+                                    <h4>Client's Name</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Client's Email</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Message's Subject</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Read Message</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Answer Message</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Delete Message</h4>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for elem in messages.messages %}
+                            <tr>
+                                <td class="cart_product">
+                                    <p>{{elem.1}}</p>
+                                </td>
+                                <td class="cart_description">
+                                    <p>{{elem.2}}</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>
+                                        <h4>{{elem.3}}</h4>
+                                    </p>
+                                </td>
+
+                                <td class="cart_price">
+
+                                    {% if elem.5 == 0 %}
+
+                                    <button class="modalButton table" onclick="displayReadMsgModal('{{elem.0}}')" id="readMsgBtn" name="readMessage">Read Message!</button>
+                                    <div id="read {{elem.0}}" class="modal readMsgModal">
+                                        <form action="read_msg" method="post">
+                                            <input class="text-center" type="hidden" value="{{elem.0}}" name="id_req" /> {% csrf_token %}
+                                            <div class="modal-content">
+                                                <span class="close">&times;</span>
+                                                <p>{{elem.4}}</p>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td class="cart_price">
+
+                                    <button class="modalButton table" onclick="displayAnswerMsgModal('{{elem.0}}')" id="answerMsgBtn">Answer Message!</button>
+                                    <div id="answer {{elem.0}}" class="modal answerMsgModal">
+                                        <div class="modal-content">
+                                            <span id="span" class="close {{elem.0}}">&times;</span>
+                                            <h3 class="title text-center admin">The message you are about to answer:</h3>
+                                            <br>
+                                            <p class="text-center">{{elem.4}}</p>
+                                            <br>
+                                            <form action="send_msg" class="contact-form row" method="post">
+                                                <textarea class="form-control textarea" type="textArea" rows="" name="response"></textarea>
+                                                <br> {% csrf_token %}
+                                                <input type="hidden" value="{{elem.0}}" name="id_request" /> {% csrf_token %}
+                                                <input type="hidden" value="{{elem.2}}" name="email_req" /> {% csrf_token %}
+                                                <input class="form-control adminPage" type="submit" name="send" value="Send" /> {% csrf_token %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                                <form action="delete_msg" method="post">
+                                    <td style="padding-left: 30%;" class="cart_delete">
+                                        <input type="hidden" value={ {elem.0}} name="msg_id" /> {% csrf_token %}
+                                        <button type="submit" name="delete_message" class="delete_button"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </form>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/modal.js' %}"></script>
+</body>
+
+</html>

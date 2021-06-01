@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICAPITSTOP</title>
+
+    <link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'style/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'style/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'style/main.css' %}" rel="stylesheet">
+    <link href="{% static 'style/responsive.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<!--/head-->
+
+<body>
+
+    <header id="header">
+        <!--header-->
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <img src="{% static 'images1/home/logo.png'%}" alt="" />
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="supplier-orders.html" class="active"><i class="fa fa-folder"></i> Orders</a></li>
+                                <li><a href="supplier-products.html"><i class="fa fa-cog"></i> Products</a></li>
+                                <li><a href="logout.html"><i class="fa fa-lock"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <!--/header-middle-->
+
+        <section id="cart_items">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">Supplier -> Orders</li>
+                    </ol>
+                </div>
+
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h3 style="padding-right: 30%;"> Orders list!</h3>
+                                </td>
+                                <td ></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="price">
+                                    <h4 style="padding-right: 30%;">Client's Name</h4>
+                                </td>
+                                <td class="price">
+                                    <h4 style="padding-left: 25%;">Address</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Email</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Order Details</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Contact Client</h4>
+                                </td>
+                                <td class="price">
+                                    <h4>Update State</h4>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key,elem in comenzi.items %}
+                            <tr>
+
+                                <td class="cart_product">
+                                    <p>
+                                        <h4 style="padding-right: 30%;" >{{elem.client_name}}</h4>
+                                    </p>
+                                </td>
+                                <td class="cart_description">
+                                    <p style="padding-left: 20%;">
+                                        {{elem.address}}
+                                    </p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>
+                                        <h4>{{elem.email}}</h4>
+                                    </p>
+                                </td>
+                                <td class="cart_price">
+
+                                    <button style="margin-top: 15px; max-width:fit-content;" class="modalButton table" onclick="displayDetailsMsgModal('{{elem.client_id}}')" id="answerMsgBtn">Order Details!</button>
+                                    <div id="details {{elem.client_id}}" class="modal answerMsgModal">
+                                        <div class="modal-content">
+                                            <span id="span" class="close {{elem.client_id}}">&times;</span>
+                                            <h3 class="title text-center admin">{{elem.client_name}}'s product details!:</h3><br>
+                                            <div class="table-responsive cart_info">
+                                                <table class="table table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <td class="cart_menu">Product</td>
+                                                            <td class="cart_menu">Brand</td>
+                                                            <td class="cart_menu">Category</td>
+                                                            <td class="cart_menu">Quantity</td>
+                                                        </tr>
+                                                    </thead>
+                                                    {% for k,e in elem.products.items %}
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{e.0}}</td>
+                                                            <td>{{e.1}}</td>
+                                                            <td>{{e.2}}</td>
+                                                            <td>{{e.4}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    {% endfor%}
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cart_price">
+                                    <button style="margin-top: 15px; max-width:fit-content;"  class="modalButton table" onclick="displayMailMsgModal('{{elem.client_id}}')" id="answerMsgBtn">Send a mail!</button>
+                                    <div id="mail {{elem.client_id}}" class="modal answerMsgModal">
+                                        <div class="modal-content">
+                                            <span id="span" class="close {{elem.client_id}}">&times;</span>
+                                            <form action="send_mail_to_client" class="contact-form row" method="post">
+                                                <h3 class="title text-center admin"> Send an email to {{elem.client_name}} !</h3>
+                                                <input class="form-control textarea" type="text" name="mail_subject" type="text" placeholder="Mail subject..."/>{% csrf_token %}
+                                                <br>
+                                                <textarea class="form-control textarea" placeholder="Write your mail here..." type="textArea" rows="5" name="response"></textarea>
+                                                <br> {% csrf_token %}
+                                                <input type="hidden" value="{{elem.email}}" name="email_req" /> {% csrf_token %}
+                                                <button class="form-control adminPage" type="submit" name="send" value="Send" >Send !</button> {% csrf_token %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="cart_delete">
+                                    {% if elem.state == '"processing"' %}
+                                    <form action="modifyOrderState" method="post">
+                                        <input class="text-center" type="hidden" value="{{key}}" name="id_req" /> {% csrf_token %}
+                                        <input type="hidden" value="{{elem.email}}" name="email_req" /> {% csrf_token %}
+                                        <button style="background-color: green;" type="submit" name="acceptOrderBtn" value="1" class="delete_button"><i class="fa fa-check"></i></button>
+                                        <button style="background-color: rgb(185, 36, 36); margin-left: 45px;" type="submit" name="refuseOrderBtn" value="1" class="delete_button"><i class="fa fa-times"></i></button>
+                                    </form>
+                                    {% else %} {%if elem.state == "accepted" %}
+                                    <h3 style="color: green;">Accepted</h3>
+                                    {%else%}
+                                    <h3 style="color: red;">Denied</h3>
+                                    {% endif %} {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!--/#cart_items-->
+
+
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/modal.js' %}"></script>
+
+</body>
+
+</html>

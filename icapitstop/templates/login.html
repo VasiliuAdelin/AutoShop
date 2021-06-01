@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICAPITSTOP</title>
+	<link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'style/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'style/animate.css' %}" rel="stylesheet">
+	<link href="{% static 'style/main.css' %}" rel="stylesheet">
+	<link href="{% static 'style/responsive.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i> +04 755 836 669</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> ICAPitstopAutoshop@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="https://twitter.com/?lang=ro"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="{% static 'images1/home/logo.png' %}" alt=""/></a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="shop.html"><i class="fa fa-barcode"></i> Shop</a></li>
+								<li><a href="#contact-us"><i class="fa fa-phone"></i> Contact</a></li>
+								<li><a href="login.html" class="active"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		
+	
+	<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+						<h2>Login to your account</h2>
+						<form action="login.html" method="POST">
+							{% csrf_token %}
+							{% if request.session.resultLogin != none %}
+								<h3 style="color:red;">{{request.session.resultLogin}}</h3>
+
+							{%endif%}
+							<input type="text" name = "username" placeholder="User Name" />
+							<input type="password" name= "password" placeholder="Password" />
+							<button type="submit" name="submit" class="btn btn-default" value="Login">Login</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">OR</h2>
+				</div>
+				<div class="col-sm-4">
+					<div class="signup-form"><!--sign up form-->
+						<h2>New User Signup!</h2>
+						<form action="login.html" method="POST">
+							{% csrf_token %}
+							{% if request.session.resultRegister != none %}
+							<h3 style="color:red;">{{request.session.resultRegister}}</h3>
+
+							{%endif%}
+							<input type="text" name="fname" placeholder="First Name"/>
+							<input type="text" name="lname"  placeholder="Last Name"/>
+							<input type="text" name="address"  placeholder="Address"/>
+							<input type="tel" name="telephone" pattern="07[0-9]{8}"  placeholder="Phone" required/>
+							<input type="email" name="email"  placeholder="Email Address"/>
+							<input type="text" name="username"  placeholder="Username"/>
+							<input type="password" name="password" placeholder="Password"/>
+							<button type="submit" name="submit" class="btn btn-default" value = "Signup">Signup</button>
+						</form>
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+	
+	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">  	
+					<div class="col-sm-8">
+						<div class="contact-form" id="contact-us">
+							<br><br><br>
+							<h2 class="title text-center">Get In Touch With Us!</h2>
+							<div class="status alert alert-success" style="display: none"></div>
+							<form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action = "contact_us">
+								<div class="form-group col-md-6">
+									<input type="text" name="name" class="form-control" required="required" placeholder="Name">
+									{% csrf_token %}
+								</div>
+								<div class="form-group col-md-6">
+									<input type="email" name="email" class="form-control" required="required" placeholder="Email">
+									{% csrf_token %}
+								</div>
+								<div class="form-group col-md-12">
+									<input type="text" name="subject" class="form-control" required="required" placeholder="Subject">
+									{% csrf_token %}
+								</div>
+								<div class="form-group col-md-12">
+									<textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your Message Here"></textarea>
+									{% csrf_token %}
+								</div>                        
+								<div class="form-group col-md-12">
+									<input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit">
+									{% csrf_token %}
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="contact-info">
+							<br><br><br>
+							<h2 class="title text-center">Contact Info</h2>
+							<address>
+								<p>ICA Pitstop Autoshop SRL</p>
+								<p>Tudor Vladimirescu, Iasi</p>
+								<p>Romania</p>
+								<p>Mobile: +04 755 836 669</p>
+								<p>Fax: 1-714-252-0026</p>
+								<p>Email: ICAPitstopAutoshop@domain.com</p>
+							</address>
+							<div class="social-networks">
+								<h2 class="title text-center">Social Networking</h2>
+								<ul>
+									<li>
+										<a href="#"><i class="fa fa-facebook"></i></a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-twitter"></i></a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-google-plus"></i></a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-youtube"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>    			
+				</div> 
+			</div>
+		</div>
+		
+		
+		
+	</footer><!--/Footer-->
+	
+
+ 
+	<!-- <script src="{% static 'js/price-range.js' %}'"></script>	 -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

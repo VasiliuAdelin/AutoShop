@@ -1,0 +1,361 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICAPITSTOP</title>
+	<link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'style/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'style/animate.css' %}" rel="stylesheet">
+	<link href="{% static 'style/main.css' %}" rel="stylesheet">
+	<link href="{% static 'style/responsive.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i> +04 755 836 669</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> ICAPitstopAutoshop@domain.com</a></li>
+								
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="https://twitter.com/?lang=ro"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="{% static 'images1/home/logo.png' %}" alt=""/></a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								{% if request.session.user_id %}
+								<li><a>Hello, {{request.session.username}} !</a></li>
+								<li><a href="shop.html" class = "active"><i class="fa fa-barcode"></i> Shop</a></li>
+								<li><a href="#contact-us"><i class="fa fa-phone"></i> Contact</a></li>
+								<li><a href="account.html"><i class="fa fa-user"></i> Account</a></li>
+								<!-- <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li> -->
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="logout.html"><i class="fa fa-lock"></i> Logout</a></li>
+								{% else %}
+								<li><a href="shop.html"><i class="fa fa-barcode"></i> Shop</a></li>
+								<li><a href="#contact-us"><i class="fa fa-phone"></i> Contact</a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+	
+	
+	<section id="advertisement">
+		<div class="container">
+			<img src="{% static 'images/shop/advertisement.jpg' %}" alt="" />
+		</div>
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+						
+						<div class="panel-group category-products" id="accordian">
+							{% for c in categories.categories %}
+							<form action="shopShowAllProducts" method="POST">
+							<!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									
+									<input type="text" name="cat" id="{{ c }}" value="{{ c }}" class="hidden"/>
+									{% csrf_token %}
+									<input class="buttonCategories" name = "categories" type="submit" class="panel-title" value="{{ c }}"/>
+									{% csrf_token %}
+								
+								</div>
+							</div>
+						</form>
+							{% endfor %}
+						</div>
+						<!--/category-products-->
+
+						<h2>Brands</h2>
+						<div class="panel-group category-products" id="accordian">
+							<!--category-productsr-->
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<input type="text" class="hidden" name="">
+									<h4 class="panel-title">>Kids</h4>
+								</div>
+							</div>
+
+						</div>
+						<!--/category-products-->
+
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right"></div>
+				<form method = "POST" action = "shopShowAllProducts">
+					
+					<select name = "sort" style="width:25%;margin-left:26%;">
+						<option selected="selected" disabled>Sorts:</option>
+						<option value="price_asc">Price low->high</option>
+						<option value="price_desc">Price high->low</option>
+						<option value="discount">Best Discount</option>
+						<option value="stock">Stock</option>
+					</select>{% csrf_token %}
+					<input type="submit" value="Sort" name="sorting" />{% csrf_token %}
+				</form>
+					<div class="features_items"><!--features_items-->
+						<br><br><h2 class="title text-center">Features Items</h2>
+
+
+					{% block content %}
+					{% if temp.produse %}
+					{% for e in produse_pagina %}
+						<div class="col-sm-4">			<!-- the product card-->
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="{{e.10}}" alt="" />
+										<!-- <h2>{{elem.2}}</h2>
+										<p style="text-decoration:line-through">{{temp.price_after}}</p> -->
+										{% if e.8 == 1 %}
+											<div class="prices">
+											<h4 style="text-decoration: line-through; color:#FE980F;">{{e.7}} RON</h4>
+											<h3>{{e.11}} RON</h3>
+										</div>
+											<p>{{e.2}}</p>
+
+										{% else %}
+											<h6>&ensp;</h6>
+											<h4>{{e.7}}</h4>
+											<p>{{e.2}}</p>
+										{% endif %}
+										<form action="addProductToCart" method="POST">
+											<input type="text" name="id_product" value={{e.0}} class="hidden">
+											{% csrf_token %}
+											<button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-times">Add to cart!</i></button>
+										</form>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>{{e.11}}</h2>
+											<p>{{e.2}}</p>
+											<form action="addProductToCart" method="POST">
+												<input type="text" name="id_product" value={{e.0}} class="hidden">
+												{% csrf_token %}
+												<button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-times">Add to cart!</i></button>
+											</form>
+										</div>
+										{% if e.8 == 1 %}
+										<img src="{% static 'images/home/sale.png' %}" class="new" alt="">
+										{% endif %}
+									</div>
+								</div>
+								
+							</div>
+						</div>
+	
+					{%endfor%}
+					{% else %}
+							{% for e in filtered.produse %}
+							<div class="col-sm-4">			<!-- the product card-->
+								<div class="product-image-wrapper">
+									<div class="single-products">
+										<div class="productinfo text-center">
+											<img src="{{e.10}}" alt="" />
+											<!-- <h2>{{elem.2}}</h2>
+											<p style="text-decoration:line-through">{{temp.price_after}}</p> -->
+											{% if e.8 == 1 %}
+												<div class="prices">
+												<h4 style="text-decoration: line-through; color:#FE980F;">{{e.7}} RON</h4>
+												<h3>{{e.11}} RON</h3>
+											</div>
+												<p>{{e.2}}</p>
+	
+											{% else %}
+												<h6>&ensp;</h6>
+												<h4>{{e.7}}</h4>
+												<p>{{e.2}}</p>
+											{% endif %}
+											<form action="addProductToCart" method="POST">
+												<input type="text" name="id_product" value={{e.0}} class="hidden">
+												{% csrf_token %}
+												<button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-times">Add to cart!</i></button>
+											</form>
+										</div>
+										<div class="product-overlay">
+											<div class="overlay-content">
+												<h2>{{e.11}}</h2>
+												<p>{{e.2}}</p>
+												<form action="addProductToCart" method="POST">
+													<input type="text" name="id_product" value={{e.0}} class="hidden">
+													{% csrf_token %}
+													<button class="btn btn-default add-to-cart" type="submit"><i class="fa fa-times">Add to cart!</i></button>
+												</form>
+											</div>
+											{% if e.8 == 1 %}
+											<img src="{% static 'images/home/sale.png' %}" class="new" alt="">
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+							{% endif %}
+							{% endblock%}
+						</div><!--features_items-->
+					{% if nr_pages.nr_pages > 1 %}
+					<center>
+						<ul class="pagination">
+							{% for p in pages.pages %}
+								{% if pagina_curenta.pagina == p %}
+									<li class="active"><a href="/shop.html?page={{p}}">{{p}}</a></li>
+								{% else %}
+									<li><a href="/shop.html?page={{p}}">{{p}}</a></li>
+								{%endif%}
+							{% endfor %}
+						</ul>
+					</center>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="contact-form" id="contact-us">
+							<br><br><br>
+							<h2 class="title text-center">Get In Touch With Us!</h2>
+							<div class="status alert alert-success" style="display: none"></div>
+							<form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action = "contact_us">
+								<div class="form-group col-md-6">
+									<input type="text" name="name" class="form-control" required="required" placeholder="Name">
+									{% csrf_token %}
+								</div>
+								<div class="form-group col-md-6">
+									<input type="email" name="email" class="form-control" required="required" placeholder="Email">
+									{% csrf_token %}
+								</div>
+								<div class="form-group col-md-12">
+									<input type="text" name="subject" class="form-control" required="required" placeholder="Subject">
+									{% csrf_token %}
+								</div>
+								<div class="form-group col-md-12">
+									<textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your Message Here"></textarea>
+									{% csrf_token %}
+								</div>                        
+								<div class="form-group col-md-12">
+									<input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit">
+									{% csrf_token %}
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="contact-info">
+							<br><br><br>
+							<h2 class="title text-center">Contact Info</h2>
+							<address>
+								<p>ICA Pitstop Autoshop SRL</p>
+								<p>Tudor Vladimirescu, Iasi</p>
+								<p>Romania</p>
+								<p>Mobile: +04 755 836 669</p>
+								<p>Fax: 1-714-252-0026</p>
+								<p>Email: ICAPitstopAutoshop@domain.com</p>
+							</address>
+							<div class="social-networks">
+								<h2 class="title text-center">Social Networking</h2>
+								<ul>
+									<li>
+										<a href="#"><i class="fa fa-facebook"></i></a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-twitter"></i></a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-google-plus"></i></a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-youtube"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>    			
+				</div> 
+			</div>
+		</div>
+		
+		
+		
+	</footer><!--/Footer-->
+	
+
+  
+
+	<!-- <script src="{% static 'js/price-range.js' %}'"></script>	 -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	
+	<script>
+		function addToCart(productId) {
+			fetch('127.0.0.1/shop.html/cart/productId', 
+				{method: 'POST'}
+			)
+		}
+	</script>
+
+</body>
+</html>
